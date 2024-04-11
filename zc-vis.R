@@ -1,21 +1,17 @@
-library(bioacoustics)
-library(tidyverse)
+library(reticulate)
+# I have to specify this because I have different versions of python on my machine, not sure if needed elsewhere
+use_python("/usr/bin/python3", required = TRUE)
 
-#Create the zc from Anabat
-#Read the zc
+# Source the Python script
+source_python("./P.py")
 
-file <- "/users/alexandremacphail/desktop/zc/2020-07-22 03-09-40_00000_000.00#"
-z <- read_zc(file)
+file <- "../test1.00#"
+output_path <- "output_zc_plot.png"
 
-zc_data <- list(raw = raw <- readBin(file, what = "integer", n = 16384, size = 1, signed = FALSE))
-md <- list( file = list(FTYPE = FTYPE <- raw[4]) )
+# Execute Python functions
+rf <- read_zc(file)
+t<-rf[[1]]
+f<-rf[[2]]
+plot_zc(t, f, pngpath=output_path)
 
-ggplot(z, aes(x=z$data$time_data, y=z$data$freq_data))
-
-time <- z$data$time_data %>% as_tibble_col("time") %>% mutate(time = time / 10e6)
-freq <- z$data$freq_data %>% as_tibble_col("freq")
-
-z1 <- bind_cols(time, freq) %>% na.omit()
-
-ggplot(z1, aes(x=time,y=freq)) + geom_point() + theme_bw()
-plot_zc(z, dot.size = 0.6)
+cat("Plot saved to:", output_path, "\n")
