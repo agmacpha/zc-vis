@@ -5,7 +5,7 @@ use_python("/usr/bin/python3", required = TRUE)
 # Source the Python script
 source_python("./P.py")
 
-file <- "../test1.00#"
+file <- "../test1.zc"
 output_path <- "output_zc_plot.png"
 
 # Execute Python functions
