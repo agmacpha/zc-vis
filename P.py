@@ -52,6 +52,6 @@ def plot_zc(times, frequencies, HPF=16000, LPF=180000, pngpath='zc_plot.png'):
 	plt.close()
 
 # Usage
-file_path = '../test2.zc' 
-times, frequencies = read_zc(file_path)
-plot_zc(times, frequencies, pngpath='test2.png')
+#file_path = '../test2.zc' 
+#times, frequencies = read_zc(file_path)
+#plot_zc(times, frequencies, pngpath='test2.png')
